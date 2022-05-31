@@ -1,213 +1,167 @@
 ﻿using SberOperations;
 
-Console.WriteLine("ДОБРО ПОЖАЛОВАТЬ В СБЕРБАНК! ВЫБЕРИТЕ ОПЕРАЦИЮ ДЛЯ СОВЕРШЕНИЯ СДЕЛКИ: КРЕДИТ,ОТКРЫТИЕ ВКЛАДА,ИПОТЕКА,ОТКРЫТИЕ НАКОПИТЕЛЬНОГО СЧЕТА");
+Console.WriteLine("Добро пожаловать в Банк! Выберите операцию для совершения действий:");
+Console.WriteLine("1.Операции по вкладу");
+Console.WriteLine("2.Операции с валютой");
+Console.WriteLine("3.Операции по кредиту");
+Console.WriteLine("4.Операции по дебетовой карте");
+Console.WriteLine("5.Операции по ипотеке");
+Console.WriteLine("Введите порядковый номер операции...");
+int x = Convert.ToInt32(Console.ReadLine());
 
-Console.WriteLine("ДЛЯ ВЫБОРА ОПЕРАЦИИ ВВЕДИТЕ К - КРЕДИТ, ВКЛ - ВКЛАД, И - ИПОТЕКА,НС - НАКОПИТЕЛЬНЫЙ СЧЕТ, ВАЛ - ВАЛЮТА");
-string str = Console.ReadLine().ToUpper();
-switch (str)
+while (x != 0)
 {
-    case "К":
-        Credit credit = new Credit();
 
-        Console.WriteLine("ВВЕДИТЕ ВАШЕ ИМЯ:");
-        credit.FirstName = Console.ReadLine().ToUpper(); //имя берущего в кредит
+    if (x == 1)
+    {
+        Console.WriteLine("Выберите операцию,которую хотите осуществить: ");
+        Console.WriteLine("1.Положить средства под депозит,");
+        Console.WriteLine("2.Добавить сумму.");
 
-        Console.WriteLine("ВВЕДИТЕ ВАШУ ФАМИЛИЮ:");
-        credit.LastName = Console.ReadLine().ToUpper();//фамилия
-
-        Console.WriteLine("ВВЕДИТЕ ДАТУ РОЖДЕНИЯ ЧЕРЕЗ ТОЧКУ:");
-        credit.Birthday = Convert.ToDateTime(Console.ReadLine());// дата рождения
-
-
-        Console.WriteLine("ВВЕДИТЕ СРОК КРЕДИТА(не более 5 лет):");
-        int term = Convert.ToInt32(Console.ReadLine());
-        credit.TermOfCredit = term; //вводим срок кредитования
-
-        while (term > 5)
+        Console.WriteLine("Введите номер операции...");
+        switch (Console.ReadLine())
         {
-            Console.WriteLine("СРОК КРЕДИТА НЕ МОЖЕТ ПРЕВЫШАТЬ 5 ЛЕТ. ПОВТОРИТЕ ПОПЫТКУ.");
-            term = Convert.ToInt32(Console.ReadLine());
+            case "1":
+
+                Deposit deposit = new Deposit();
+                deposit.MakeADeposit();
+
+                break;
+
+            case "2":
+                Deposit deposit1 = new Deposit();
+                Console.WriteLine("Введите номер договора...");
+                deposit1.Contract = Convert.ToInt32(Console.ReadLine());
+                deposit1.AddSum(deposit1.Contract);
+                break;
+        }
+               
+    }
+
+    if (x == 2)
+    {
+        Console.WriteLine("Выберите операцию: покупка или продажа");
+        switch (Console.ReadLine().ToUpper())
+        {
+            case "ПОКУПКА":
+                Currency.Buy();
+
+                break;
+            case "ПРОДАЖА":
+                Currency.Sell();
+
+                break;
+        }
+    }
+
+    if (x == 3)
+    {
+        Console.WriteLine("Выберите операцию,которую хотите осуществить: ");
+        Console.WriteLine("1.Взять кредит,");
+        Console.WriteLine("2.Добавить сумму");
+        Console.WriteLine("3.Добавить ежемесячный платеж.");
+        Console.WriteLine("Введите номер операции...");
+        switch (Console.ReadLine())
+        {
+            case "1":
+
+                Credit credit = new Credit();
+                credit.TakeACredit();
+
+                break;
+
+            case "2":
+                Credit credit1 = new Credit();
+                Console.WriteLine("Введите номер договора...");
+                credit1.Contract = Convert.ToInt32(Console.ReadLine());
+                credit1.AddSum(credit1.Contract);
+                break;
+            case "3":
+                Credit credit2 = new Credit();
+                Console.WriteLine("Введите номер договора...");
+                credit2.Contract = Convert.ToInt32(Console.ReadLine());
+                credit2.AddPayment(credit2.Contract);
+                break;
         }
 
 
-        Console.WriteLine("ВВЕДИТЕ СУММУ КРЕДИТА:");
-        int sum = Convert.ToInt32(Console.ReadLine());
-        credit.SumOfCredit = sum; //вводим сумму кредитования
+    }
 
-        while (sum > 8000000)
+    if (x == 4)
+    {
+        Console.WriteLine("Выберите операцию,которую хотите осуществить по дебетовой карте: пополнение, снятие ");
+        switch (Console.ReadLine().ToUpper())
         {
-            Console.WriteLine("СУММА КРЕДИТА НЕ МОЖЕТ ПРЕВЫШАТЬ  8 МЛН. РУБ. . ПОВТОРИТЕ ПОПЫТКУ.");
-            sum = Convert.ToInt32(Console.ReadLine());
+            case "ПОПОЛНЕНИЕ":
+
+                OperationWithAccount operationWithAccount = new OperationWithAccount();
+                operationWithAccount.Put();
+
+                break;
+
+            case "СНЯТИЕ":
+                OperationWithAccount operationWithAccount1 = new OperationWithAccount();
+                operationWithAccount1.Take();
+                break;
+        }
+    }
+    if (x == 5)
+    {
+
+        Console.WriteLine("Выберите операцию,которую хотите осуществить: ");
+        Console.WriteLine("1.Взять Ипотеку,");
+        Console.WriteLine("2.Добавить сумму");
+        Console.WriteLine("3.Добавить ежемесячный платеж.");
+        Console.WriteLine("Введите номер операции...");
+        switch (Console.ReadLine())
+        {
+            case "1":
+
+                Mortgage mortgage = new Mortgage();
+                mortgage.TakeAMortgage();
+
+                break;
+
+            case "2":
+                Mortgage mortgage1 = new Mortgage(); 
+                Console.WriteLine("Введите номер договора...");
+                mortgage1.Contract = Convert.ToInt32(Console.ReadLine());
+                mortgage1.AddSum(mortgage1.Contract);
+                break;
+            case "3":
+                Mortgage mortgage2 = new Mortgage();
+                Console.WriteLine("Введите номер договора...");
+                mortgage2.Contract = Convert.ToInt32(Console.ReadLine());
+                mortgage2.AddPayment(mortgage2.Contract);
+                break;
         }
 
 
-        Console.WriteLine("ВВЕДИТЕ ПРЕДМЕТ КРЕДИТОВАНИЯ:");
-        credit.Object = Console.ReadLine().ToUpper(); //вводим объект кредитования
+    }
+    Console.WriteLine("Желате продолжить?");
+    string answ = Console.ReadLine().ToUpper();
+    if (answ == "ДА")
+    {
+        Console.WriteLine("Выберите операцию для совершения действий:");
 
-        Console.WriteLine();
-        Console.WriteLine("Подтверждаем информацию...");
-        Console.WriteLine();
+        Console.WriteLine("1.Операции по вкладу");
+        Console.WriteLine("2.Операции с валютой");
+        Console.WriteLine("3.Операции по кредиту");
+        Console.WriteLine("4.Операции по дебетовой карте");
+        Console.WriteLine("5.Операции по ипотеке");
+        Console.WriteLine("Введите порядковый номер операции...");
+        x = Convert.ToInt32(Console.ReadLine());
 
-        Console.WriteLine(credit.ToString());
-        credit.Payment();//выводим ежемесячный платеж
-
-        Console.WriteLine();
-        Console.WriteLine("-----------------------------------------------");
-        Console.WriteLine();
-        break;
-
-    case "ВКЛ":
-
-        Contribution contrib = new Contribution();
-
-        Console.WriteLine("ВВЕДИТЕ ВАШЕ ИМЯ:");
-        contrib.FirstName = Console.ReadLine().ToUpper() ;//имя вкладчика
-        Console.WriteLine("ВВЕДИТЕ ВАШУ ФАМИЛИЮ:");//фамилия
-        contrib.LastName = Console.ReadLine().ToUpper();//фамилия
-        Console.WriteLine("ВВЕДИТЕ ДАТУ РОЖДЕНИЯ ЧЕРЕЗ ТОЧКУ:");
-        contrib.Birthday = Convert.ToDateTime(Console.ReadLine()); ;// дата рождения
-        Console.WriteLine("ВВЕДИТЕ СРОК ДЕПОЗИТА В МЕСЯЦАХ(не менее 3 месяцев):");
-        int term1 = Convert.ToInt32(Console.ReadLine());
-        contrib.Term = term1; //вводим срок кредитования
-
-        while (term1 < 3)
-        {
-            Console.WriteLine("СРОК ДЕПОЗИТА НЕ МОЖЕТ БЫТЬ МЕНЬШЕ 3 МЕСЯЦЕВ. ПОВТОРИТЕ ПОПЫТКУ.");
-            term = Convert.ToInt32(Console.ReadLine());
-        }
-
-
-        Console.WriteLine("ВВЕДИТЕ СУММУ КРЕДИТА:");
-        int sum1 = Convert.ToInt32(Console.ReadLine());
-        contrib.Sum = sum1; //вводим сумму кредитования
-
-        while (sum1 < 30000)
-        {
-            Console.WriteLine("НАЧАЛЬНАЯ СУММА ДЕПОЗИТА НЕ МОЖЕТ БЫТЬ МЕНЬШЕ  30 ТЫС. РУБ. . ПОВТОРИТЕ ПОПЫТКУ.");
-            sum = Convert.ToInt32(Console.ReadLine());
-        }
-
-        Console.WriteLine();
-        Console.WriteLine("Подтверждаем информацию...");
-        Console.WriteLine();
-
-        Console.WriteLine(contrib.ToString());//принтуем данные
-        contrib.FinalSum();//сумма на выходе с процентами
-
-        Console.WriteLine();
-        Console.WriteLine("-----------------------------------------------");
-        Console.WriteLine();
-
-        break;
-
-    case "И":
-        Mortgage mortgage = new Mortgage();
-
-        Console.WriteLine("ВВЕДИТЕ ВАШЕ ИМЯ:");
-        mortgage.FirstName = Console.ReadLine().ToUpper(); //имя берущего в кредит
-
-        Console.WriteLine("ВВЕДИТЕ ВАШУ ФАМИЛИЮ:");
-        mortgage.LastName = Console.ReadLine().ToUpper();//фамилия
-
-        Console.WriteLine("ВВЕДИТЕ ДАТУ РОЖДЕНИЯ ЧЕРЕЗ ТОЧКУ:");
-        mortgage.Birthday = Convert.ToDateTime(Console.ReadLine());// дата рождения
-
-
-        Console.WriteLine("ВВЕДИТЕ СРОК ИПОТЕКИ(не более 30 лет):");
-        int term2 = Convert.ToInt32(Console.ReadLine());
-        mortgage.Term = term2; //вводим срок кредитования
-
-        while (term2 > 30)
-        {
-            Console.WriteLine("СРОК ИПОТЕКИ НЕ МОЖЕТ ПРЕВЫШАТЬ 30 ЛЕТ. ПОВТОРИТЕ ПОПЫТКУ.");
-            term2 = Convert.ToInt32(Console.ReadLine());
-        }
-
-
-        Console.WriteLine("ВВЕДИТЕ СУММУ ИПОТЕКИ:");
-        int sum2 = Convert.ToInt32(Console.ReadLine());
-        mortgage.Sum = sum2; //вводим сумму кредитования
-
-        while (sum2 > 100000000)
-        {
-            Console.WriteLine("СУММА ИПОТЕКИ НЕ МОЖЕТ ПРЕВЫШАТЬ  100 МЛН. РУБ. . ПОВТОРИТЕ ПОПЫТКУ.");
-            sum2 = Convert.ToInt32(Console.ReadLine());
-        }
-
-
-        Console.WriteLine();
-        Console.WriteLine("Подтверждаем информацию...");
-        Console.WriteLine();
-
-        Console.WriteLine(mortgage.ToString());
-        mortgage.Payment();//выводим ежемесячный платеж
-        mortgage.FirstPayment();
-
-        Console.WriteLine();
-        Console.WriteLine("-----------------------------------------------");
-        Console.WriteLine();
-
-        break;
-
-
-    case "НС":
-
-        SavingAccount savingaccount = new SavingAccount();
-
-        Console.WriteLine("ВВЕДИТЕ ВАШЕ ИМЯ:");
-        savingaccount.FirstName = Console.ReadLine().ToUpper(); //имя берущего в кредит
-
-        Console.WriteLine("ВВЕДИТЕ ВАШУ ФАМИЛИЮ:");
-        savingaccount.LastName = Console.ReadLine().ToUpper();//фамилия
-
-        Console.WriteLine("ВВЕДИТЕ ДАТУ РОЖДЕНИЯ ЧЕРЕЗ ТОЧКУ:");
-        savingaccount.Birthday = Convert.ToDateTime(Console.ReadLine());// дата рождения
-
-
-        Console.WriteLine("ВВЕДИТЕ СРОК НАКОПИТЕЛЬНОГО СЧЕТА:");
-        int term3 = Convert.ToInt32(Console.ReadLine());
-        savingaccount.Term = term3; //вводим срок кредитования
-
-
-        Console.WriteLine("ВВЕДИТЕ СУММУ НАКОПИТЕЛЬНОГО СЧЕТА:");
-        int sum3 = Convert.ToInt32(Console.ReadLine());
-        savingaccount.Sum = sum3; //вводим сумму кредитования
-
-        Console.WriteLine();
-        Console.WriteLine("Подтверждаем информацию...");
-        Console.WriteLine();
-
-        Console.WriteLine(savingaccount.ToString());
-        savingaccount.FinalSum();
-
-        Console.WriteLine();
-        Console.WriteLine("-----------------------------------------------");
-        Console.WriteLine();
-
-        break;
-
-    case "ВАЛ":
-
-        Currency cur = new Currency();
-        
-        Console.WriteLine("ВВЕДИТЕ ВАШЕ ИМЯ:");
-        cur .FirstName = Console.ReadLine().ToUpper(); //имя 
-
-        Console.WriteLine("ВВЕДИТЕ ВАШУ ФАМИЛИЮ:");
-        cur.LastName = Console.ReadLine().ToUpper();//фамилия
-
-        Console.WriteLine("ВЫБЕРИТЕ ВАЛЮТУ ДЛЯ СОВЕРШЕНИЯ ОПЕРАЦИИ: USD - ДОЛЛАР США, EUR - ЕВРО, CAD - КАНАДСКИЙ ДОЛЛАР");
-        string typeofcurrency = Console.ReadLine().ToUpper();
-        cur.TypeofCurrency = typeofcurrency; //ВАЛЮТА
-
-        Console.WriteLine("ВЫБЕРИТЕ ВИД СДЕЛКИ: ПРОДАЖА, ПОКУПКА");
-        string typeofdeal = Console.ReadLine().ToUpper();
-        cur.TypeOfDeal= typeofdeal;//СДЕЛКА
-
-        cur.Deal(typeofcurrency,typeofdeal);
-
-        break; 
+    }
+    if (answ == "НЕТ")
+    {
+        x = 0;
+    }  
+    
 }
+Console.WriteLine("Спасибо за пользованием услугами банка! До свидания!");
+
+
 
 
 

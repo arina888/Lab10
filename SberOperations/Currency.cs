@@ -6,90 +6,76 @@ using System.Threading.Tasks;
 
 namespace SberOperations
 {
-    public class Currency:Person
+    public class Currency : Account
     {
-        public string TypeofCurrency { get; set; }
-        public static double ExchangeRate { get; set; }
-       // public int Quantity { get; set; }
+        public static double SellRateUSD = 60.64;
+        public static double BuyRateUSD = 70.38;
+        public static double SellRateEUR = 63.49;
+        public static double BuyRateEUR = 74.02;
+        public static double SellRateCAD = 46.56;
+        public static double BuyRateCAD = 59.73;
 
-       public string TypeOfDeal { get; set; }
-
-        //public Currency(string typeofcurrency, string typeofdeal,int quantity )
-        //{
-        //    TypeofCurrency = typeofcurrency;
-        //    TypeOfDeal = typeofdeal;
-        //    Quantity = quantity;
-            
-        //}
-        public void Deal(string typeofcurrency, string typeofdeal)
+        public static void Buy()
         {
-            TypeofCurrency = typeofcurrency;
-            TypeOfDeal = typeofdeal;
-           
 
-            if (typeofcurrency == "EUR" && typeofdeal == "ПРОДАЖА")
+            Console.WriteLine("Введите обозначение валюты,которую хотите купить(USD - доллар, EUR - евро, CAD - канадский доллар)");
+            string typeofcurrency = Console.ReadLine().ToUpper();
+            if (typeofcurrency == "USD")
             {
-                Console.Write("АКТУАЛЬНЫЙ КУРС (ПРОДАЖА):");
-                double exchangerate = 69.66;
-                Console.WriteLine(exchangerate);
-                Console.WriteLine("ВВЕДИТЕ КОЛИЧЕСТВО ВАЛЮТЫ,КОТОРОЕ ЖЕЛАЕТЕ ПРОДАТЬ:");
-                int quantity = Convert.ToInt32(Console.ReadLine());//вводим количесвто валюты
-               double y= quantity* exchangerate;//получите за продажу валюты
-                Console.WriteLine($"{Math.Round(y)} рублей Вы получите за продажу валюты");
+                Console.WriteLine("Введите количество валюты,которую хотите купить:");
+                double s = Convert.ToDouble(Console.ReadLine());
+               
+                Bank.ChangeBank(s, "ПокупкаUSD");
             }
-            if (typeofcurrency == "EUR" && typeofdeal == "ПОКУПКА")
+            if (typeofcurrency == "EUR")
             {
-                Console.Write("АКТУАЛЬНЫЙ КУРС (ПОКУПКА):");
-                double exchangerate = 80.94;
-                Console.WriteLine(exchangerate);
-                Console.WriteLine("ВВЕДИТЕ КОЛИЧЕСТВО ВАЛЮТЫ,КОТОРОЕ ЖЕЛАЕТЕ КУПИТЬ:");
-                int quantity = Convert.ToInt32(Console.ReadLine());//вводим количесвто валюты
-                double y = quantity * exchangerate;//надо заплатить при покупке валюты
-                Console.WriteLine($"{Math.Round(y)} рублей Вам надо заплатить за покупку валюты");
+                Console.WriteLine("Введите количество валюты,которую хотите купить:");
+                double s = Convert.ToDouble(Console.ReadLine());
+               
+                Bank.ChangeBank(s, "ПокупкаEUR");
             }
-            if (typeofcurrency == "USD" && typeofdeal == "ПОКУПКА")
-            {
-                Console.Write("АКТУАЛЬНЫЙ КУРС (ПОКУПКА):");
-                double exchangerate = 76.92;
-                Console.WriteLine(exchangerate);
-                Console.WriteLine("ВВЕДИТЕ КОЛИЧЕСТВО ВАЛЮТЫ,КОТОРОЕ ЖЕЛАЕТЕ КУПИТЬ:");
-                int quantity = Convert.ToInt32(Console.ReadLine());//вводим количесвто валюты
-                double y = quantity * exchangerate;//надо заплатить при покупке валюты
-                Console.WriteLine($"{Math.Round(y)} рублей Вам надо заплатить за покупку валюты");
-            }
-            if (typeofcurrency == "USD" && typeofdeal == "ПРОДАЖА")
-            {
-                Console.Write("АКТУАЛЬНЫЙ КУРС (ПРОДАЖА):");
-                double exchangerate = 66.38;
-                Console.WriteLine(exchangerate);
-                Console.WriteLine("ВВЕДИТЕ КОЛИЧЕСТВО ВАЛЮТЫ,КОТОРОЕ ЖЕЛАЕТЕ ПРОДАТЬ:");
-                int quantity = Convert.ToInt32(Console.ReadLine());//вводим количесвто валюты
-                double y = quantity * exchangerate;//получите за продажу валюты
-                Console.WriteLine($"{Math.Round(y)} рублей Вы получите за продажу валюты");
-            }
-            if (typeofcurrency == "CAD" && typeofdeal == "ПРОДАЖА")
-            {
-                Console.Write("АКТУАЛЬНЫЙ КУРС (ПРОДАЖА):");
-                double exchangerate = 50.75;
-                Console.WriteLine(exchangerate);
-                Console.WriteLine("ВВЕДИТЕ КОЛИЧЕСТВО ВАЛЮТЫ,КОТОРОЕ ЖЕЛАЕТЕ ПРОДАТЬ:");
-                int quantity = Convert.ToInt32(Console.ReadLine());//вводим количесвто валюты
-                double y = quantity * exchangerate;//получите за продажу валюты
-                Console.WriteLine($"{Math.Round(y)} рублей Вы получите за продажу валюты");
-            }
-             if (typeofcurrency == "CAD" && typeofdeal == "ПОКУПКА")
-            {
-                Console.Write("АКТУАЛЬНЫЙ КУРС (ПОКУПКА):");
-                double exchangerate = 50.75;
-                Console.WriteLine(exchangerate);
-                Console.WriteLine("ВВЕДИТЕ КОЛИЧЕСТВО ВАЛЮТЫ,КОТОРОЕ ЖЕЛАЕТЕ КУПИТЬ:");
-                int quantity = Convert.ToInt32(Console.ReadLine());//вводим количесвто валюты
-                double y = quantity * exchangerate;
 
-                Console.WriteLine($"{Math.Round(y)} рублей Вам надо заплатить за покупку валюты");
+            if (typeofcurrency == "CAD")
+            {
+                double s = Convert.ToDouble(Console.ReadLine());
+               
+                Bank.ChangeBank(s, "ПокупкаCAD");
+            }
 
-             }
         }
-       
+
+        public static void Sell()
+        {
+
+            Console.WriteLine("Введите обозначение валюты,которую хотите продать (USD - доллар, EUR - евро, CAD - канадский доллар)");
+            string typeofcurrency = Console.ReadLine();
+            if (typeofcurrency == "USD")
+            {
+                Console.WriteLine("Введите количество валюты,которую хотите продать:");
+                double s = Convert.ToDouble(Console.ReadLine());
+               
+                Bank.ChangeBank(s, "ПродажаUSD");
+            }
+            if (typeofcurrency == "EUR")
+            {
+                Console.WriteLine("Введите количество валюты,которую хотите продать:");
+                double s = Convert.ToDouble(Console.ReadLine());
+               
+                Bank.ChangeBank(s, "ПродажаEUR");
+            }
+
+            if (typeofcurrency == "CAD")
+            {
+                Console.WriteLine("Введите количество валюты,которую хотите продать:");
+                double s = Convert.ToDouble(Console.ReadLine());
+                
+                Bank.ChangeBank(s, "ПродажаCAD");
+            }
+
+
+        }
+
+
     }
 }
+
