@@ -69,23 +69,24 @@ namespace SberOperations
             Console.WriteLine(Math.Round(y));
         }
         public static double MonthlyPayment(double sumofmortgage)
-        {   Mortgage mortgage = new Mortgage();
+        {
+            Mortgage mortgage = new Mortgage();
             mortgage.SumOfMortgage = sumofmortgage;
-            double x = sumofmortgage * ((RateOfMortgage / (100.0*12))  / (1-((1 + RateOfMortgage / (100.0* 12 )* (1- mortgage.TermOfMortgage * 12))))) ;
+            double x = sumofmortgage * ((RateOfMortgage / (100.0 * 12)) / (1 - ((1 + RateOfMortgage / (100.0 * 12) * (1 - mortgage.TermOfMortgage * 12)))));
             return x;
         }
 
-        public void AddPayment(int contract)
-        {
-            Mortgage mortgage = new Mortgage();
-            Account account = new Account();
+        //public void AddPayment(int contract)
+        //{
+        //    Mortgage mortgage = new Mortgage();
+        //    Account account = new Account();
 
-            double y = MonthlyPayment(mortgage.SumOfMortgage);
-            Bank.ChangeBank(y, "Депозит");
-           
-            IAC.AddInfo(y, "Докладывание", contract, account.FIO,"Операция прошла");
+        //    double y = MonthlyPayment(mortgage.SumOfMortgage);
+        //    Bank.ChangeBank(y, "Депозит");
 
-        }
+        //    IAC.AddInfo(y, "Докладывание", contract, account.FIO,"Операция прошла");
+
+        //}
         public void AddSum(int contract)
         {
             Mortgage mortgage = new Mortgage();

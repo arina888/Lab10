@@ -44,15 +44,15 @@ namespace SberOperations
             double x = SumOfDeposit * (Math.Pow(RateOfDeposit / (12*100)+ 1, TermOfDeposit));
             Console.WriteLine($"Конечная сумма составит : {Math.Round(x)} рублей");
         }
-        public void AddSum(int contr)// считаем конечную сумму по вкладу через Term месяцев после докладывания
-        {Account account = new Account();
-            Console.WriteLine("Введите сумму которую хотите внести:");
-            double summ = Convert.ToDouble(Console.ReadLine());
-            Bank.ChangeBank(summ,"Депозит") ;
-            double x = (SumOfDeposit + summ) * (Math.Pow(RateOfDeposit / (12 * 100) + 1, TermOfDeposit));
-            Console.WriteLine($"Конечная сумма составит : {Math.Round(x)} рублей");
-            IAC.AddInfo(SumOfDeposit, "Депозит", contr, account.FIO, "Операция прошла");
-        }
+        //public void AddSum(int contr)// считаем конечную сумму по вкладу через Term месяцев после докладывания
+        //{Account account = new Account();
+        //    Console.WriteLine("Введите сумму которую хотите внести:");
+        //    double summ = Convert.ToDouble(Console.ReadLine());
+        //    Bank.ChangeBank(summ,"Депозит") ;
+        //    double x = (SumOfDeposit + summ) * (Math.Pow(RateOfDeposit / (12 * 100) + 1, TermOfDeposit));
+        //    //Console.WriteLine($"Конечная сумма составит : {Math.Round(x)} рублей");
+        //    IAC.AddInfo(SumOfDeposit, "Докладывание", contr, account.FIO, "Операция прошла");
+        //}
       
         
     }

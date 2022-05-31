@@ -60,7 +60,7 @@ namespace SberOperations
                 
                 debet.ChangeDebets(debet.Sum,"Пополнение",req);
             //Console.WriteLine($"На счет поступило: {sum}");
-        }
+            }
 
         public void Take()
         {
@@ -81,17 +81,13 @@ namespace SberOperations
             Console.WriteLine("Введите сумму,которую хотите снять:");
             debet1.Sum = Convert.ToDouble(Console.ReadLine());
 
-
-            if (debet1.Balance >= debet1.Sum)
-            {
-
                 Notify?.Invoke($"Со счета снято: {debet1.Sum}");
                 TakeNotify?.Invoke($"Со счета снято: {debet1.Sum}");
 
                 notify?.Invoke($"Со счета снято: {debet1.Sum}");
                 debet1.ChangeDebets(debet1.Sum, "Снятие", req1);
-                Console.WriteLine($"Со счета снято: {debet1.Sum}");
-            }
+                
+            
         
                
             

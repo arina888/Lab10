@@ -106,26 +106,25 @@ namespace SberOperations
              }
             if (typeoperation == "Докладывание")
             {
-                
-                Random r = new Random();
                 var selectinfo = from p in iacs
                                    where p.Contract == contract
                                    orderby p.Id
                                    select p;
+                var selectinfo1 = selectinfo.TakeLast(1);
                 using (var writer = new StreamWriter(path1, true, encoding))
 
                 {
-                    foreach (var n in selectinfo)
+                    foreach (var n in selectinfo1)
                     {
                         var NewRecord = new List<IAC>()
                         {
-                        new IAC { Id = listI.Count ,FIO = n.FIO, Contract = contract,Operation = n.Operation, Summ = n.Summ, Entered = sum, Rate = n.Rate,Left = n.Summ-sum,Status=status}
+                        new IAC { Id = listI.Count ,FIO = n.FIO, Contract = contract,Operation = n.Operation, Summ = n.Summ, Entered = sum, Rate = n.Rate,Left = n.Left-sum,Status=status}
                         };
                         foreach (var k in NewRecord)
                         {
                             writer.WriteLine(k.ToExcel());
                         }
-                        Console.WriteLine($"Осталось выплатить: {n.Summ-sum}") ;
+                        Console.WriteLine($"Осталось выплатить: {n.Left-sum}") ;
                     }
 
                 }

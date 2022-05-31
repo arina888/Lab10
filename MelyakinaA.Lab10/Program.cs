@@ -1,5 +1,6 @@
 ﻿using SberOperations;
 
+
 Console.WriteLine("Добро пожаловать в Банк! Выберите операцию для совершения действий:");
 Console.WriteLine("1.Операции по вкладу");
 Console.WriteLine("2.Операции с валютой");
@@ -14,28 +15,9 @@ while (x != 0)
 
     if (x == 1)
     {
-        Console.WriteLine("Выберите операцию,которую хотите осуществить: ");
-        Console.WriteLine("1.Положить средства под депозит,");
-        Console.WriteLine("2.Добавить сумму.");
-
-        Console.WriteLine("Введите номер операции...");
-        switch (Console.ReadLine())
-        {
-            case "1":
-
                 Deposit deposit = new Deposit();
                 deposit.MakeADeposit();
-
-                break;
-
-            case "2":
-                Deposit deposit1 = new Deposit();
-                Console.WriteLine("Введите номер договора...");
-                deposit1.Contract = Convert.ToInt32(Console.ReadLine());
-                deposit1.AddSum(deposit1.Contract);
-                break;
-        }
-               
+  
     }
 
     if (x == 2)
@@ -59,7 +41,6 @@ while (x != 0)
         Console.WriteLine("Выберите операцию,которую хотите осуществить: ");
         Console.WriteLine("1.Взять кредит,");
         Console.WriteLine("2.Добавить сумму");
-        Console.WriteLine("3.Добавить ежемесячный платеж.");
         Console.WriteLine("Введите номер операции...");
         switch (Console.ReadLine())
         {
@@ -76,12 +57,7 @@ while (x != 0)
                 credit1.Contract = Convert.ToInt32(Console.ReadLine());
                 credit1.AddSum(credit1.Contract);
                 break;
-            case "3":
-                Credit credit2 = new Credit();
-                Console.WriteLine("Введите номер договора...");
-                credit2.Contract = Convert.ToInt32(Console.ReadLine());
-                credit2.AddPayment(credit2.Contract);
-                break;
+           
         }
 
 
@@ -111,7 +87,6 @@ while (x != 0)
         Console.WriteLine("Выберите операцию,которую хотите осуществить: ");
         Console.WriteLine("1.Взять Ипотеку,");
         Console.WriteLine("2.Добавить сумму");
-        Console.WriteLine("3.Добавить ежемесячный платеж.");
         Console.WriteLine("Введите номер операции...");
         switch (Console.ReadLine())
         {
@@ -128,12 +103,7 @@ while (x != 0)
                 mortgage1.Contract = Convert.ToInt32(Console.ReadLine());
                 mortgage1.AddSum(mortgage1.Contract);
                 break;
-            case "3":
-                Mortgage mortgage2 = new Mortgage();
-                Console.WriteLine("Введите номер договора...");
-                mortgage2.Contract = Convert.ToInt32(Console.ReadLine());
-                mortgage2.AddPayment(mortgage2.Contract);
-                break;
+            
         }
 
 
@@ -160,8 +130,4 @@ while (x != 0)
     
 }
 Console.WriteLine("Спасибо за пользованием услугами банка! До свидания!");
-
-
-
-
 

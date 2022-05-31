@@ -13,16 +13,15 @@
             double x = credit.SumOfCredit * ((RateOfCredit / 100.0) + (RateOfCredit / 100.0) / ((Math.Pow(1 + RateOfCredit / 100.0, 12 * credit.TermOfCredit) - 1)));
             return x;
         }
-        public void AddPayment(int contr)
-        {Credit credit = new Credit();  
-            Account account = new Account();
-            
-            double y = credit.SumOfCredit - credit.SumOfCredit * ((RateOfCredit / 100.0) + (RateOfCredit / 100.0) / ((Math.Pow(1 + RateOfCredit / 100.0, 12 * credit.TermOfCredit) - 1)));
-            
-            double x = credit.SumOfCredit * ((RateOfCredit / 100.0) + (RateOfCredit / 100.0) / ((Math.Pow(1 + RateOfCredit / 100.0, 12 * credit.TermOfCredit) - 1)));
-            IAC.AddInfo(x, "Докладывание", contr, account.FIO,"Операция прошла");
-            Bank.ChangeBank(x, "Депозит");
-        }
+        //public void AddPayment(int contr)
+        //{Credit credit = new Credit();  
+        //    Account account = new Account();
+
+        //    double y = credit.SumOfCredit - credit.SumOfCredit * ((RateOfCredit / 100.0) + (RateOfCredit / 100.0) / ((Math.Pow(1 + RateOfCredit / 100.0, 12 * credit.TermOfCredit) - 1)));
+
+        //    double x = credit.SumOfCredit * ((RateOfCredit / 100.0) + (RateOfCredit / 100.0) / ((Math.Pow(1 + RateOfCredit / 100.0, 12 * credit.TermOfCredit) - 1)));
+        //    IAC.AddInfo(x, "Докладывание", contr, account.FIO,"Операция прошла");Bank.ChangeBank(x, "Депозит");
+        //}
         public void AddSum(int contr)
         {
             Account account = new Account();
@@ -33,9 +32,7 @@
             double y = SumOfCredit - sum2;
             Bank.ChangeBank(sum2, "Депозит");
             double x = (SumOfCredit - sum2) * ((RateOfCredit / 100.0) + (RateOfCredit / 100.0) / ((Math.Pow(1 + RateOfCredit / 100.0, 12 * TermOfCredit) - 1)));
-            //Console.WriteLine($"Сделан перерасчет. Ежемесячный платеж составит :");
-            //Console.WriteLine(Math.Round(x));
-            
+          
         }
         public void TakeACredit()
         {

@@ -37,8 +37,9 @@ namespace SberOperations
 
             if (typeofcurrency == "CAD")
             {
+                Console.WriteLine("Введите количество валюты,которую хотите купить:");
                 double s = Convert.ToDouble(Console.ReadLine());
-               
+
                 Bank.ChangeBank(s, "ПокупкаCAD");
             }
 
@@ -47,32 +48,35 @@ namespace SberOperations
         public static void Sell()
         {
 
-            Console.WriteLine("Введите обозначение валюты,которую хотите продать (USD - доллар, EUR - евро, CAD - канадский доллар)");
-            string typeofcurrency = Console.ReadLine();
-            if (typeofcurrency == "USD")
+            Console.WriteLine("Введите обозначение валюты,которую хотите продать (U - доллар, E - евро, C - канадский доллар)");
+            //string typeofcurrency = Console.ReadLine().ToUpper();
+            switch (Console.ReadLine().ToUpper())
             {
+                case "U":
+            
                 Console.WriteLine("Введите количество валюты,которую хотите продать:");
                 double s = Convert.ToDouble(Console.ReadLine());
+
+                Bank.ChangeBank(s, "ПродажаU");
+                    break;
                
-                Bank.ChangeBank(s, "ПродажаUSD");
-            }
-            if (typeofcurrency == "EUR")
-            {
+                case "E":
+            
                 Console.WriteLine("Введите количество валюты,которую хотите продать:");
-                double s = Convert.ToDouble(Console.ReadLine());
-               
-                Bank.ChangeBank(s, "ПродажаEUR");
-            }
+                double s1 = Convert.ToDouble(Console.ReadLine());
 
-            if (typeofcurrency == "CAD")
-            {
+                Bank.ChangeBank(s1, "ПродажаE");
+                    break;
+
+                case "C":
+            
                 Console.WriteLine("Введите количество валюты,которую хотите продать:");
-                double s = Convert.ToDouble(Console.ReadLine());
-                
-                Bank.ChangeBank(s, "ПродажаCAD");
+                double s2 = Convert.ToDouble(Console.ReadLine());
+
+                Bank.ChangeBank(s2, "ПродажаC");
+                    break;
+
             }
-
-
         }
 
 

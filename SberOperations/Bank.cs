@@ -101,7 +101,6 @@ namespace SberOperations
 
             if (typeoperation == "ПокупкаUSD")
             {
-                
 
                 if (listU[listU.Count-1] <= sum )
                 {
@@ -121,9 +120,9 @@ namespace SberOperations
 
                 {
                     var NewRecord = new List<Bank>()
-                {
-                new Bank {Rubles = listR[listR.Count-1], USD=listU[listU.Count-1], EUR=listE[listE.Count-1], CAD=listC[listC.Count-1] }
-                };
+                    {
+                     new Bank {Rubles = listR[listR.Count-1], USD=listU[listU.Count-1], EUR=listE[listE.Count-1], CAD=listC[listC.Count-1] }
+                    };
                 
                     foreach (var n in NewRecord)
                     {
@@ -133,15 +132,15 @@ namespace SberOperations
             }
             if (typeoperation == "ПокупкаEUR")
             {
-                listR[listR.Count-1] += sum * Currency.BuyRateEUR;
+                ////listR[listR.Count-1] += sum * Currency.BuyRateEUR;
 
-                if (listE[listE.Count-1] <= sum * Currency.BuyRateEUR)
-                {
-                    Console.WriteLine("У банка недостаточно средств для предоставления данной услуги. Повторите позже.");
+                //if (listE[listE.Count-1] <= sum )
+                //{
+                //    Console.WriteLine("У банка недостаточно средств для предоставления данной услуги. Повторите позже.");
 
-                }
-                else
-                {
+                //}
+                //else
+                //{
                     listR[listR.Count - 1] += sum * Currency.BuyRateEUR;
                     listE[listE.Count-1] -= sum ;
                     Console.WriteLine("Сделка совершена.");
@@ -156,131 +155,130 @@ namespace SberOperations
                     {
                         writer.WriteLine(n.ToExcel());
                     }
-                } }
+                    }      
+            }
 
-                if (typeoperation == "ПокупкаCAD")
+
+            if (typeoperation == "ПокупкаCAD")
+            {
+                if (listC[listC.Count - 1] <= sum)
                 {
-                    
+                    Console.WriteLine("У банка недостаточно средств для предоставления данной услуги. Повторите позже.");
 
-                    if (listC[listC.Count-1] <= sum * Currency.BuyRateCAD)
+                }
+                else
+                {
+                    listR[listR.Count - 1] += sum * Currency.BuyRateEUR;
+                    listC[listC.Count - 1] -= sum;
+                    Console.WriteLine("Сделка совершена.");
+
+                    using (var writer = new StreamWriter(path, true, encoding))
+                    {
+                        var NewRecord = new List<Bank>()
+                            {
+                             new Bank {Rubles = listR[listR.Count-1], USD=listU[listU.Count-1], EUR=listE[listE.Count-1], CAD=listC[listC.Count-1] }
+                            };
+                        foreach (var n in NewRecord)
+                        {
+                            writer.WriteLine(n.ToExcel());
+                        }
+                    }
+                }
+            }
+                    if (typeoperation == "ПродажаU")
+                    {
+                    if (listR[listR.Count - 1] <= sum * Currency.SellRateUSD)
                     {
                         Console.WriteLine("У банка недостаточно средств для предоставления данной услуги. Повторите позже.");
 
                     }
                     else
                     {
-                        listR[listR.Count-1] += sum* Currency.BuyRateCAD;
-                        listC[listC.Count-1] -= sum ;
+                        listU[listU.Count - 1] += sum;
+                        listR[listR.Count - 1] -= sum * Currency.SellRateUSD;
                         Console.WriteLine("Сделка совершена.");
 
-                   
-                    using (var writer = new StreamWriter(path, true, encoding))
-                    {
-                        var NewRecord = new List<Bank>()
-                        {
-                        new Bank {Rubles = listR[listR.Count-1], USD=listU[listU.Count-1], EUR=listE[listE.Count-1], CAD=listC[listC.Count-1] }        
-                        };
-                        foreach (var n in NewRecord)
-                        {
-                            writer.WriteLine(n.ToExcel());
-                        }
-                    } }
 
-                    if (typeoperation == "ПродажаUSD")
-                    {
-
-                        if (listR[listR.Count-1] <= sum * Currency.SellRateUSD)
-                        {
-
-                            Console.WriteLine("У банка недостаточно средств для предоставления данной услуги. Повторите позже.");
-
-                        }
-                        else
-                        {
-                            listU[listU.Count-1] += sum;
-                            listR[listR.Count-1] -= sum * Currency.SellRateUSD;
-                            Console.WriteLine("Сделка совершена.");
-
-                        
                         using (var writer = new StreamWriter(path, true, encoding))
                         {
                             var NewRecord = new List<Bank>()
                             {
-                             new Bank {Rubles = listR[listR.Count-1], USD=listU[listU.Count-1], EUR=listE[listE.Count-1], CAD=listC[listC.Count-1] }                        };
-                            foreach (var n in NewRecord)
-                            {
-                                writer.WriteLine(n.ToExcel());
-                            }
-
-
-                        }}
-
-                    }
-
-                    if (typeoperation == "ПродажаEUR")
-                    {
-                        
-
-                        if (listR[listR.Count-1] <= sum * Currency.SellRateEUR)
-                        {
-
-                            Console.WriteLine("У банка недостаточно средств для предоставления данной услуги. Повторите позже.");
-
-                        }
-                        else
-                        {   listE[listE.Count] += sum;
-                            listR[listR.Count] -= sum * Currency.SellRateEUR;
-                            Console.WriteLine("Сделка совершена.");
-                        
-                        using (var writer = new StreamWriter(path, true, encoding))
-                        {
-                            var NewRecord = new List<Bank>()
-                            {
-                           new Bank {Rubles = listR[listR.Count-1], USD=listU[listU.Count-1], EUR=listE[listE.Count-1], CAD=listC[listC.Count-1] }                            };
-                            foreach (var n in NewRecord)
-                            {
-                                writer.WriteLine(n.ToExcel());
-                            }
-
-
-                        }}
-
-                    }
-
-                    if (typeoperation == "ПродажаCAD")
-                    {
-                        
-
-                        if (listR[listR.Count-1] <= sum * Currency.SellRateCAD)
-                        {
-
-                            Console.WriteLine("У банка недостаточно средств для предоставления данной услуги. Повторите позже.");
-
-                        }
-                        else
-                        {
-                            listC[listC.Count] += sum;
-                            listR[listR.Count] -= sum * Currency.SellRateCAD;
-                            Console.WriteLine("Сделка совершена.");
-                        
-                        using (var writer = new StreamWriter(path, true, encoding))
-                        {
-                            var NewRecord = new List<Bank>()
-                            {
-                            new Bank {Rubles = listR[listR.Count], USD=listU[listU.Count], EUR=listE[listE.Count], CAD=listC[listC.Count] }       
+                             new Bank {Rubles = listR[listR.Count-1], USD=listU[listU.Count-1], EUR=listE[listE.Count-1], CAD=listC[listC.Count-1] }
                             };
                             foreach (var n in NewRecord)
                             {
                                 writer.WriteLine(n.ToExcel());
                             }
 
+                        }
+                    }
 
+                    }
+
+            if (typeoperation == "ПродажаE")
+            {
+
+                if (listR[listR.Count - 1] <= sum * Currency.SellRateEUR)
+                {
+                    Console.WriteLine("У банка недостаточно средств для предоставления данной услуги. Повторите позже.");
+
+                }
+                else
+                {
+                    listE[listE.Count - 1] += sum;
+                    listR[listR.Count - 1] -= sum * Currency.SellRateEUR;
+                    Console.WriteLine("Сделка совершена.");
+
+                    using (var writer = new StreamWriter(path, true, encoding))
+                    {
+                        var NewRecord = new List<Bank>()
+                            {
+                           new Bank {Rubles = listR[listR.Count-1], USD=listU[listU.Count-1], EUR=listE[listE.Count-1], CAD=listC[listC.Count-1] }
+                            };
+                        foreach (var n in NewRecord)
+                        {
+                            writer.WriteLine(n.ToExcel());
                         }
 
-                    }}
+
+                    }
+
                 }
+            }
+
+
+            if (typeoperation == "ПродажаC")
+            {
+
+                if (listR[listR.Count - 1] <= sum * Currency.SellRateUSD)
+                {
+                    Console.WriteLine("У банка недостаточно средств для предоставления данной услуги. Повторите позже.");
+
+                }
+                else
+                {
+                    listC[listC.Count - 1] += sum;
+                    listR[listR.Count - 1] -= sum * Currency.SellRateCAD;
+                    Console.WriteLine("Сделка совершена.");
+
+                    using (var writer = new StreamWriter(path, true, encoding))
+                    {
+                        var NewRecord = new List<Bank>()
+                            {
+                             new Bank {Rubles = listR[listR.Count-1], USD=listU[listU.Count-1], EUR=listE[listE.Count-1], CAD=listC[listC.Count-1] }
+                            };
+                        foreach (var n in NewRecord)
+                        {
+                            writer.WriteLine(n.ToExcel());
+                        }
+
+                    }
+
+                }
+            }
+                        
 
             }
         }
     }
-}
+
